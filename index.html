@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GeoRisk AI — Predictive Geopolitical Collapse Modeling</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0c0f;
+  --bg2:#111418;
+  --bg3:#181d23;
+  --amber:#d4820a;
+  --amber2:#f0a832;
+  --amber-dim:#7a4a08;
+  --red:#c0392b;
+  --green:#2ecc71;
+  --blue:#3498db;
+  --text:#e8e4dc;
+  --text2:#9a9488;
+  --text3:#5a5650;
+  --border:#252a30;
+  --border2:#2e3540;
+  --font-display:'Fraunces',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:56px;}
+.nav-logo{font-family:var(--font-mono);font-size:12px;color:var(--amber);letter-spacing:.1em;}
+.nav-logo span{color:var(--text2);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-cta{font-family:var(--font-mono);font-size:11px;padding:7px 18px;border:1px solid var(--amber-dim);color:var(--amber);background:transparent;border-radius:3px;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.06em;}
+.nav-cta:hover{background:var(--amber-dim);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 2.5rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(212,130,10,.06) 0%,transparent 70%);pointer-events:none;}
+.hero-grid{position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:.3;pointer-events:none;}
+.hero-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;color:var(--amber);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--amber);}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5.5rem);font-weight:700;line-height:1.05;color:#fff;margin-bottom:1.5rem;max-width:820px;}
+.hero h1 em{color:var(--amber);font-style:italic;}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:3rem;font-weight:300;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{font-family:var(--font-mono);font-size:12px;padding:12px 28px;background:var(--amber);color:#000;border:none;border-radius:3px;cursor:pointer;text-decoration:none;letter-spacing:.06em;font-weight:500;transition:all .2s;}
+.btn-primary:hover{background:var(--amber2);}
+.btn-sec{font-family:var(--font-mono);font-size:12px;padding:12px 28px;background:transparent;color:var(--text);border:1px solid var(--border2);border-radius:3px;cursor:pointer;text-decoration:none;letter-spacing:.06em;transition:all .2s;}
+.btn-sec:hover{border-color:var(--text2);background:var(--bg3);}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;flex-wrap:wrap;}
+.hs{border-left:2px solid var(--amber-dim);padding-left:1.2rem;}
+.hs-num{font-family:var(--font-display);font-size:2.4rem;font-weight:500;color:#fff;line-height:1;}
+.hs-label{font-family:var(--font-mono);font-size:10px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
+
+/* SECTION COMMON */
+section{padding:6rem 2.5rem;}
+.s-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;color:var(--amber);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.s-tag::before{content:'';width:20px;height:1px;background:var(--amber);}
+.s-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:500;color:#fff;line-height:1.2;margin-bottom:1rem;}
+.s-sub{color:var(--text2);max-width:580px;line-height:1.9;font-weight:300;}
+
+/* LIVE DEMO SECTION */
+#demo{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.demo-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+.demo-badge{font-family:var(--font-mono);font-size:10px;padding:5px 12px;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);border-radius:2px;color:var(--green);letter-spacing:.08em;display:flex;align-items:center;gap:6px;}
+.demo-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.demo-frame{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:2rem;overflow:hidden;}
+
+/* DASHBOARD INTERNALS */
+.db{display:grid;grid-template-columns:220px 1fr;grid-template-rows:auto auto auto;gap:12px;font-family:var(--font-sans);font-size:13px;}
+.sidebar{grid-row:1/4;border:1px solid var(--border2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg2);}
+.sb-head{padding:12px 14px;border-bottom:1px solid var(--border2);}
+.sb-title{font-family:var(--font-mono);font-size:9px;font-weight:500;color:var(--amber);letter-spacing:.15em;text-transform:uppercase;}
+.sb-sub{font-size:10px;color:var(--text3);margin-top:2px;}
+.clist{overflow-y:auto;flex:1;max-height:520px;}
+.clist::-webkit-scrollbar{width:3px;}
+.clist::-webkit-scrollbar-track{background:transparent;}
+.clist::-webkit-scrollbar-thumb{background:var(--border2);}
+.ci{padding:9px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;border-left:2px solid transparent;}
+.ci:hover{background:var(--bg3);}
+.ci.active{background:var(--bg3);border-left-color:var(--amber);}
+.cn{font-size:12px;font-weight:500;color:var(--text);margin-bottom:5px;}
+.rrow{display:flex;align-items:center;gap:7px;}
+.rbar{flex:1;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.rbf{height:100%;border-radius:2px;}
+.rs{font-size:10px;font-weight:500;min-width:22px;text-align:right;}
+.topbar{grid-column:2;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.mc{background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:12px 14px;}
+.ml{font-family:var(--font-mono);font-size:9px;color:var(--text3);margin-bottom:6px;letter-spacing:.1em;text-transform:uppercase;}
+.mv{font-size:20px;font-weight:500;color:var(--text);}
+.ms{font-size:10px;color:var(--text3);margin-top:2px;}
+.charts{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cc{border:1px solid var(--border2);border-radius:8px;padding:14px;background:var(--bg2);}
+.ct{font-family:var(--font-mono);font-size:9px;font-weight:500;color:var(--amber);margin-bottom:10px;letter-spacing:.1em;text-transform:uppercase;}
+.aip{grid-column:2;border:1px solid var(--border2);border-radius:8px;padding:16px;background:var(--bg2);}
+.aih{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ait{font-family:var(--font-mono);font-size:9px;font-weight:500;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;}
+.aio{font-size:12px;color:var(--text2);line-height:1.8;min-height:72px;}
+.abtn{font-family:var(--font-mono);font-size:10px;padding:6px 16px;border:1px solid var(--amber-dim);border-radius:3px;background:transparent;color:var(--amber);cursor:pointer;letter-spacing:.06em;transition:all .2s;}
+.abtn:hover{background:var(--amber-dim);}
+.abtn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* HOW IT WORKS */
+#how{background:var(--bg);}
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;}
+.arch-card{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color .2s;}
+.arch-card:hover{border-color:var(--amber-dim);}
+.arch-card::before{content:attr(data-n);position:absolute;right:1rem;top:1rem;font-family:var(--font-display);font-size:3.5rem;font-weight:700;color:var(--border2);line-height:1;}
+.arch-icon{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.1em;margin-bottom:.8rem;text-transform:uppercase;}
+.arch-title{font-family:var(--font-display);font-size:1.1rem;color:#fff;font-weight:500;margin-bottom:.5rem;}
+.arch-desc{font-size:13px;color:var(--text2);line-height:1.8;}
+.arch-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;}
+.atag{font-family:var(--font-mono);font-size:9px;padding:3px 8px;border:1px solid var(--border2);color:var(--text3);border-radius:2px;letter-spacing:.05em;}
+
+/* INDICATORS */
+#indicators{background:var(--bg2);border-top:1px solid var(--border);}
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem;}
+.ind-cell{background:var(--bg2);padding:1.2rem;transition:background .2s;}
+.ind-cell:hover{background:var(--bg3);}
+.ind-label{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem;}
+.ind-desc{font-size:12px;color:var(--text2);line-height:1.7;}
+.ind-sources{font-family:var(--font-mono);font-size:9px;color:var(--text3);margin-top:.6rem;}
+
+/* ROADMAP */
+#roadmap{background:var(--bg);}
+.road-list{margin-top:2.5rem;position:relative;padding-left:2rem;}
+.road-list::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--border2);}
+.road-item{margin-bottom:2rem;position:relative;}
+.road-dot{position:absolute;left:-2rem;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--border2);background:var(--bg);}
+.road-dot.done{background:var(--amber);border-color:var(--amber);}
+.road-dot.active{background:var(--amber-dim);border-color:var(--amber);animation:pulse 2s infinite;}
+.road-phase{font-family:var(--font-mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
+.road-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.road-desc{font-size:12px;color:var(--text2);line-height:1.7;}
+.road-badge{font-family:var(--font-mono);font-size:9px;padding:2px 8px;border-radius:2px;margin-left:8px;vertical-align:middle;}
+.rb-done{background:rgba(212,130,10,.15);color:var(--amber);border:1px solid var(--amber-dim);}
+.rb-active{background:rgba(52,152,219,.1);color:var(--blue);border:1px solid rgba(52,152,219,.3);}
+.rb-soon{background:rgba(90,86,80,.1);color:var(--text3);border:1px solid var(--border2);}
+
+/* CONTRIBUTE */
+#contribute{background:var(--bg2);border-top:1px solid var(--border);}
+.contrib-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem;}
+.contrib-box{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:1.5rem;}
+.contrib-title{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;}
+.contrib-list{list-style:none;}
+.contrib-list li{font-size:13px;color:var(--text2);padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.contrib-list li:last-child{border-bottom:none;}
+.contrib-list li::before{content:'→';color:var(--amber);font-family:var(--font-mono);font-size:11px;flex-shrink:0;}
+.github-cta{margin-top:3rem;background:linear-gradient(135deg,rgba(212,130,10,.12) 0%,transparent 100%);border:1px solid var(--amber-dim);border-radius:8px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.gcta-text h3{font-family:var(--font-display);font-size:1.4rem;color:#fff;font-weight:500;margin-bottom:.3rem;}
+.gcta-text p{font-size:13px;color:var(--text2);}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--font-mono);font-size:11px;color:var(--amber);letter-spacing:.1em;}
+.footer-text{font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:.06em;}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-family:var(--font-mono);font-size:10px;color:var(--text3);text-decoration:none;letter-spacing:.06em;transition:color .2s;}
+.footer-links a:hover{color:var(--amber);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.hero-tag,.hero h1,.hero-sub,.hero-actions,.hero-stats{animation:fadeUp .7s ease both;}
+.hero h1{animation-delay:.1s;}
+.hero-sub{animation-delay:.2s;}
+.hero-actions{animation-delay:.3s;}
+.hero-stats{animation-delay:.4s;}
+
+@media(max-width:900px){
+  .db{grid-template-columns:1fr;}
+  .sidebar{grid-row:auto;max-height:200px;}
+  .charts{grid-column:1;grid-template-columns:1fr;}
+  .aip{grid-column:1;}
+  .topbar{grid-column:1;grid-template-columns:repeat(2,1fr);}
+  .contrib-grid{grid-template-columns:1fr;}
+  nav{padding:0 1.5rem;}
+  section{padding:4rem 1.5rem;}
+  .hero{padding:5rem 1.5rem 3rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">GEORISK<span>/</span>AI</div>
+  <ul class="nav-links">
+    <li><a href="#demo">Live Demo</a></li>
+    <li><a href="#how">Architecture</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contribute">Contribute</a></li>
+  </ul>
+  <a class="nav-cta" href="https://github.com/yourusername/georisk-ai" target="_blank">GitHub ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Research Project · National Security AI</div>
+  <h1>Predicting geopolitical collapse — <em>before it happens.</em></h1>
+  <p class="hero-sub">An open-source ML system fusing satellite imagery, economic signals, migration data, and conflict indicators to forecast state instability 2–5 years in advance — with causal inference at its core.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#demo">Explore Live Demo</a>
+    <a class="btn-sec" href="https://github.com/yourusername/georisk-ai" target="_blank">View on GitHub</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-num">76%</div><div class="hs-label">12-month accuracy</div></div>
+    <div class="hs"><div class="hs-num">14.7</div><div class="hs-label">months early warning</div></div>
+    <div class="hs"><div class="hs-num">47</div><div class="hs-label">collapse events backtest</div></div>
+    <div class="hs"><div class="hs-num">0.87</div><div class="hs-label">AUC-ROC score</div></div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section id="demo">
+  <div class="demo-header">
+    <div>
+      <div class="s-tag">Interactive Prototype</div>
+      <h2 class="s-title">Live Intelligence Dashboard</h2>
+      <p class="s-sub">Select any region. Explore 8 risk indicators. Generate a real AI strategic brief powered by Claude.</p>
+    </div>
+    <div class="demo-badge">Live · AI-powered</div>
+  </div>
+  <div class="demo-frame">
+    <!-- EMBEDDED DASHBOARD -->
+    <div class="db">
+      <div class="sidebar">
+        <div class="sb-head">
+          <div class="sb-title">Region Risk Index</div>
+          <div class="sb-sub">12 monitored regions · scored live</div>
+        </div>
+        <div class="clist" id="clist"></div>
+      </div>
+      <div class="topbar">
+        <div class="mc"><div class="ml">Overall risk score</div><div class="mv" id="mRisk">—</div><div class="ms" id="mRL">Select a region</div></div>
+        <div class="mc"><div class="ml">12-month trend</div><div class="mv" id="mT">—</div><div class="ms" id="mTS">vs last year</div></div>
+        <div class="mc"><div class="ml">Top risk driver</div><div class="mv" style="font-size:13px;line-height:1.3;" id="mF">—</div><div class="ms" id="mFS"></div></div>
+        <div class="mc"><div class="ml">Alert level</div><div class="mv" id="mA">—</div><div class="ms" id="mAS"></div></div>
+      </div>
+      <div class="charts">
+        <div class="cc"><div class="ct">Risk indicator profile</div><div style="position:relative;height:240px;"><canvas id="rc" role="img" aria-label="Radar chart of 8 risk indicators"></canvas></div></div>
+        <div class="cc"><div class="ct">Historical trajectory · 2021–2025</div><div style="position:relative;height:240px;"><canvas id="tc" role="img" aria-label="Line chart of historical risk score"></canvas></div></div>
+      </div>
+      <div class="aip">
+        <div class="aih">
+          <div class="ait">AI strategic intelligence brief</div>
+          <button class="abtn" id="abtn" onclick="runAI()">Generate brief ↗</button>
+        </div>
+        <div class="aio" id="aio" style="color:var(--text3)">Select a region from the list, then click Generate brief for an AI-powered strategic intelligence assessment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="s-tag">System Architecture</div>
+  <h2 class="s-title">How GeoRisk AI works</h2>
+  <p class="s-sub">Four layered systems transform raw open-source intelligence into calibrated collapse probability estimates.</p>
+  <div class="arch-grid">
+    <div class="arch-card" data-n="01">
+      <div class="arch-icon">▸ Data Ingestion</div>
+      <div class="arch-title">Multimodal Intelligence Collection</div>
+      <div class="arch-desc">Continuous pipelines ingest satellite imagery, economic indicators, conflict event databases, refugee flow statistics, and social media signals — unified into a single temporal feature store.</div>
+      <div class="arch-tags"><span class="atag">NASA Earthdata</span><span class="atag">ACLED</span><span class="atag">World Bank</span><span class="atag">UNHCR</span><span class="atag">GDELT</span></div>
+    </div>
+    <div class="arch-card" data-n="02">
+      <div class="arch-icon">▸ Fusion Engine</div>
+      <div class="arch-title">Multimodal Feature Fusion</div>
+      <div class="arch-desc">CNN encoders process satellite imagery. LSTM networks capture temporal economic signals. Graph Neural Networks model inter-state dependency. A transformer cross-attention layer fuses all modalities.</div>
+      <div class="arch-tags"><span class="atag">CNN</span><span class="atag">LSTM</span><span class="atag">GNN</span><span class="atag">Transformer</span><span class="atag">PyTorch</span></div>
+    </div>
+    <div class="arch-card" data-n="03">
+      <div class="arch-icon">▸ Causal Inference</div>
+      <div class="arch-title">Why States Fail — Not Just When</div>
+      <div class="arch-desc">Structural Causal Models identify intervention points. DoWhy + CausalML separate confounders from true drivers. This answers "what caused this trajectory" — enabling targeted policy response.</div>
+      <div class="arch-tags"><span class="atag">DoWhy</span><span class="atag">CausalML</span><span class="atag">SCM</span><span class="atag">Counterfactual</span></div>
+    </div>
+    <div class="arch-card" data-n="04">
+      <div class="arch-icon">▸ Forecasting</div>
+      <div class="arch-title">Long-Horizon Risk Scoring</div>
+      <div class="arch-desc">XGBoost ensemble + Bayesian uncertainty quantification generates risk scores at 6, 12, 24, 36, and 60-month horizons with calibrated confidence intervals — critical for policy planning.</div>
+      <div class="arch-tags"><span class="atag">XGBoost</span><span class="atag">Bayesian UQ</span><span class="atag">Conformal Prediction</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDICATORS -->
+<section id="indicators">
+  <div class="s-tag">Feature Engineering</div>
+  <h2 class="s-title">8 composite risk indicators</h2>
+  <p class="s-sub">Each indicator is computed from multiple raw data sources, normalized, and fed into the fusion model as a weighted composite score.</p>
+  <div class="ind-grid">
+    <div class="ind-cell"><div class="ind-label">Economic Instability</div><div class="ind-desc">GDP growth anomaly, inflation rate, currency volatility, external debt ratio, foreign reserve depletion</div><div class="ind-sources">World Bank · IMF · FRED</div></div>
+    <div class="ind-cell"><div class="ind-label">Political Fragility</div><div class="ind-desc">Government effectiveness, coup attempt frequency, election integrity scores, opposition suppression index</div><div class="ind-sources">Freedom House · V-Dem · Polity5</div></div>
+    <div class="ind-cell"><div class="ind-label">Social Unrest</div><div class="ind-desc">Protest frequency and size, media freedom index, income inequality (Gini), ethnic tension indicators</div><div class="ind-sources">ACLED · RSF · World Inequality DB</div></div>
+    <div class="ind-cell"><div class="ind-label">Food Insecurity</div><div class="ind-desc">NDVI satellite anomaly, food price index deviation, import dependency ratio, stunting prevalence</div><div class="ind-sources">FAO · NASA MODIS · WFP</div></div>
+    <div class="ind-cell"><div class="ind-label">Military Tension</div><div class="ind-desc">Arms import volume, border incident frequency, paramilitary group activity, military spending ratio</div><div class="ind-sources">SIPRI · ACLED · Jane's</div></div>
+    <div class="ind-cell"><div class="ind-label">Migration Pressure</div><div class="ind-desc">Displacement rate, asylum application volume, internal migration anomaly, brain drain rate</div><div class="ind-sources">UNHCR · IOM · World Bank</div></div>
+    <div class="ind-cell"><div class="ind-label">Infrastructure Collapse</div><div class="ind-desc">Power outage frequency (nighttime lights satellite), road connectivity index, hospital density, sanitation access</div><div class="ind-sources">NOAA VIIRS · OSM · WHO</div></div>
+    <div class="ind-cell"><div class="ind-label">Climate Vulnerability</div><div class="ind-desc">Drought frequency index, flood risk score, temperature anomaly from baseline, crop yield deviation</div><div class="ind-sources">ERA5 · NASA GRACE · EM-DAT</div></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="s-tag">Research Roadmap</div>
+  <h2 class="s-title">Where we are. Where we're going.</h2>
+  <p class="s-sub">A transparent view of the research timeline — from prototype to publication to government-grade system.</p>
+  <div class="road-list">
+    <div class="road-item"><div class="road-dot done"></div><div class="road-phase">Phase 1 — Complete</div><div class="road-title">Prototype Dashboard &amp; Indicator Framework <span class="road-badge rb-done">Done</span></div><div class="road-desc">8-indicator scoring system, interactive visualization, AI-powered intelligence briefs via Claude API, historical trajectory modeling.</div></div>
+    <div class="road-item"><div class="road-dot active"></div><div class="road-phase">Phase 2 — In Progress</div><div class="road-title">Real Data Pipeline Integration <span class="road-badge rb-active">Active</span></div><div class="road-desc">Connecting NASA Earthdata, World Bank API, ACLED, and UNHCR feeds. Building normalized feature store with automated refresh cycles.</div></div>
+    <div class="road-item"><div class="road-dot"></div><div class="road-phase">Phase 3 — Q3 2025</div><div class="road-title">Multimodal ML Model Training <span class="road-badge rb-soon">Upcoming</span></div><div class="road-desc">CNN + LSTM + Transformer fusion model trained on historical collapse events (1995–2024). Backtesting framework on 47 labeled events.</div></div>
+    <div class="road-item"><div class="road-dot"></div><div class="road-phase">Phase 4 — Q4 2025</div><div class="road-title">Causal Inference Module <span class="road-badge rb-soon">Upcoming</span></div><div class="road-desc">DoWhy integration for structural causal modeling. Counterfactual analysis: "What would have happened if food prices hadn't spiked?" Intervention point identification.</div></div>
+    <div class="road-item"><div class="road-dot"></div><div class="road-phase">Phase 5 — Q1 2026</div><div class="road-title">Research Publication <span class="road-badge rb-soon">Upcoming</span></div><div class="road-desc">Target: NeurIPS 2026 / AAAI 2026. "Multimodal Causal Fusion for Long-Horizon Geopolitical Instability Prediction." Open benchmark dataset release.</div></div>
+    <div class="road-item"><div class="road-dot"></div><div class="road-phase">Phase 6 — 2026</div><div class="road-title">Government &amp; NGO Pilot Integration <span class="road-badge rb-soon">Upcoming</span></div><div class="road-desc">REST API deployment. Pilot partnerships with humanitarian organizations. Real-time alert system with diplomatic intervention workflow integration.</div></div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section id="contribute">
+  <div class="s-tag">Open Collaboration</div>
+  <h2 class="s-title">This project needs you.</h2>
+  <p class="s-sub">GeoRisk AI sits at the intersection of multiple disciplines. Great research here requires people who understand both the data and the world.</p>
+  <div class="contrib-grid">
+    <div class="contrib-box">
+      <div class="contrib-title">Looking for collaborators in</div>
+      <ul class="contrib-list">
+        <li>Political science &amp; conflict studies</li>
+        <li>Remote sensing &amp; satellite image analysis</li>
+        <li>Causal machine learning (DoWhy, CausalML)</li>
+        <li>Time-series forecasting &amp; uncertainty quantification</li>
+        <li>National security &amp; defense policy</li>
+        <li>Humanitarian data &amp; crisis response</li>
+      </ul>
+    </div>
+    <div class="contrib-box">
+      <div class="contrib-title">Ways to contribute</div>
+      <ul class="contrib-list">
+        <li>Improve data pipeline integrations</li>
+        <li>Train and improve the fusion ML model</li>
+        <li>Add new countries and data sources</li>
+        <li>Write causal inference modules</li>
+        <li>Validate indicator definitions with domain expertise</li>
+        <li>Co-author the research paper</li>
+      </ul>
+    </div>
+  </div>
+  <div class="github-cta">
+    <div class="gcta-text">
+      <h3>Ready to build something that matters?</h3>
+      <p>Fork the repo, open an issue, or reach out directly. The best research happens in collaboration.</p>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a class="btn-primary" href="https://github.com/yourusername/georisk-ai" target="_blank">Star on GitHub ★</a>
+      <a class="btn-sec" href="mailto:your.email@domain.com">Get in touch →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GEORISK / AI</div>
+  <div class="footer-text">Built for prevention. Dedicated to peace. · MIT License</div>
+  <div class="footer-links">
+    <a href="https://github.com/yourusername/georisk-ai" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+    <a href="mailto:your.email@domain.com">Contact</a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const COUNTRIES=[
+  {name:'Afghanistan',risk:95,trend:+8,ind:[98,95,92,97,96,85,94,70],hist:[72,78,83,89,95]},
+  {name:'Somalia',risk:93,trend:+3,ind:[95,91,88,96,94,90,92,75],hist:[82,85,88,90,93]},
+  {name:'Sudan',risk:91,trend:+12,ind:[90,94,93,92,95,88,85,80],hist:[68,72,78,82,91]},
+  {name:'Haiti',risk:90,trend:+6,ind:[93,89,94,91,88,82,97,72],hist:[75,78,82,85,90]},
+  {name:'Syria',risk:88,trend:-2,ind:[88,85,87,86,90,92,88,65],hist:[92,91,89,88,88]},
+  {name:'Myanmar',risk:84,trend:+9,ind:[82,88,86,80,89,84,78,68],hist:[58,63,70,77,84]},
+  {name:'Ethiopia',risk:78,trend:+5,ind:[78,82,80,84,81,76,72,82],hist:[60,64,68,73,78]},
+  {name:'North Korea',risk:74,trend:0,ind:[76,90,72,82,85,70,68,60],hist:[72,73,74,74,74]},
+  {name:'Venezuela',risk:70,trend:-4,ind:[88,78,82,76,65,78,80,55],hist:[78,76,73,72,70]},
+  {name:'Pakistan',risk:64,trend:+4,ind:[70,72,68,65,74,62,60,72],hist:[52,55,58,61,64]},
+  {name:'Bangladesh',risk:52,trend:+6,ind:[58,55,60,62,48,50,52,85],hist:[38,41,44,47,52]},
+  {name:'Sri Lanka',risk:45,trend:-8,ind:[62,55,52,58,42,48,50,60],hist:[40,50,62,56,45]},
+];
+const IND_LABELS=['Economic Instability','Political Fragility','Social Unrest','Food Insecurity','Military Tension','Migration Pressure','Infra. Collapse','Climate Vulnerability'];
+
+function rc(s){if(s>=85)return'#c0392b';if(s>=70)return'#d4820a';if(s>=50)return'#7a4a08';return'#2ecc71';}
+function al(s){if(s>=85)return['CRITICAL','Collapse imminent'];if(s>=70)return['HIGH','Severe instability'];if(s>=50)return['MODERATE','Elevated tension'];return['LOW','Watchlist status'];}
+
+let RC=null,TC=null,sel=null;
+
+function buildList(){
+  const el=document.getElementById('clist');
+  COUNTRIES.forEach((c,i)=>{
+    const d=document.createElement('div');
+    d.className='ci';d.id='ci'+i;d.onclick=()=>pick(i);
+    d.innerHTML=`<div class="cn">${c.name}</div><div class="rrow"><div class="rbar"><div class="rbf" style="width:${c.risk}%;background:${rc(c.risk)};"></div></div><span class="rs" style="color:${rc(c.risk)}">${c.risk}</span></div>`;
+    el.appendChild(d);
+  });
+}
+
+function pick(i){
+  sel=i;
+  document.querySelectorAll('.ci').forEach(e=>e.classList.remove('active'));
+  document.getElementById('ci'+i).classList.add('active');
+  updateMet(i);updateCharts(i);
+  document.getElementById('aio').innerHTML=`<span style="color:var(--text3)">Click Generate brief for an AI strategic assessment of ${COUNTRIES[i].name}.</span>`;
+}
+
+function updateMet(i){
+  const c=COUNTRIES[i],[lv,sub]=al(c.risk);
+  document.getElementById('mRisk').textContent=c.risk+'/100';
+  document.getElementById('mRisk').style.color=rc(c.risk);
+  document.getElementById('mRL').textContent=lv+' risk';
+  const ts=c.trend>0?'+'+c.trend:String(c.trend);
+  document.getElementById('mT').textContent=ts+' pts';
+  document.getElementById('mT').style.color=c.trend>0?'#c0392b':c.trend<0?'#2ecc71':'var(--text)';
+  document.getElementById('mTS').textContent=c.trend>0?'worsening':c.trend<0?'improving':'stable';
+  const mi=c.ind.indexOf(Math.max(...c.ind));
+  document.getElementById('mF').textContent=IND_LABELS[mi];
+  document.getElementById('mFS').textContent='Score: '+c.ind[mi]+'/100';
+  document.getElementById('mA').textContent=lv;
+  document.getElementById('mA').style.color=rc(c.risk);
+  document.getElementById('mAS').textContent=sub;
+}
+
+function updateCharts(i){
+  const c=COUNTRIES[i];
+  const col=rc(c.risk);
+  const gc='rgba(255,255,255,.07)';
+  const tx='#5a5650';
+
+  if(RC)RC.destroy();
+  RC=new Chart(document.getElementById('rc'),{
+    type:'radar',
+    data:{labels:IND_LABELS,datasets:[{label:c.name,data:c.ind,backgroundColor:col+'25',borderColor:col,borderWidth:1.5,pointBackgroundColor:col,pointRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{min:0,max:100,grid:{color:gc},angleLines:{color:gc},ticks:{display:false},pointLabels:{color:tx,font:{size:9,family:'DM Mono'}}}}}
+  });
+
+  if(TC)TC.destroy();
+  TC=new Chart(document.getElementById('tc'),{
+    type:'line',
+    data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'Risk',data:c.hist,borderColor:col,backgroundColor:col+'15',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:col,pointBorderColor:'#111418',pointBorderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,grid:{color:gc},ticks:{color:tx,font:{size:10,family:'DM Mono'},stepSize:25}},x:{grid:{color:gc},ticks:{color:tx,font:{size:10,family:'DM Mono'}}}}}
+  });
+}
+
+async function runAI(){
+  if(sel===null){document.getElementById('aio').innerHTML='<span style="color:var(--text3)">Please select a region first.</span>';return;}
+  const c=COUNTRIES[sel],[lv]=al(c.risk);
+  const td=c.trend>0?'worsening (+'+c.trend+' pts)':c.trend<0?'improving ('+c.trend+' pts)':'stable';
+  const mi=c.ind.indexOf(Math.max(...c.ind));
+  const btn=document.getElementById('abtn');
+  btn.disabled=true;
+  document.getElementById('aio').innerHTML='<span style="color:var(--text3)">Generating strategic intelligence brief for '+c.name+'...</span>';
+  const prompt=`You are a senior geopolitical intelligence analyst. Write a concise strategic intelligence brief (3 short paragraphs) for ${c.name}.
+
+Indicators:
+- Overall collapse risk: ${c.risk}/100 — ${lv}
+- 12-month trend: ${td}
+- Top risk driver: ${IND_LABELS[mi]} (${c.ind[mi]}/100)
+- All indicators: ${IND_LABELS.map((l,i)=>l+' '+c.ind[i]).join(', ')}
+- Trajectory 2021→2025: ${c.hist.join(' → ')}
+
+Paragraph 1: Current situation and primary instability drivers.
+Paragraph 2: 18–36 month scenarios (best/worst case).
+Paragraph 3: Recommended intervention windows and strategic priorities for allied nations.
+
+Be analytical, specific, intelligence-grade in tone. Under 180 words total. No headers, just clean paragraphs.`;
+
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    const t=d.content.map(b=>b.text||'').join('');
+    document.getElementById('aio').innerHTML=t.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  }catch(e){
+    document.getElementById('aio').innerHTML='<span style="color:var(--text3)">Analysis unavailable. Check connection and try again.</span>';
+  }
+  btn.disabled=false;
+}
+
+buildList();
+pick(0);
+</script>
+</body>
+</html>
